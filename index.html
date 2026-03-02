@@ -1,350 +1,342 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Garagen-Konfigurator | Schnell zur Wunschgarage</title>
-  <meta name="description" content="Konfiguriere deine Wunschgarage in wenigen Minuten. Maße, Optik, Ausstattung – transparent und einfach." />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Laumer Garagen Konfigurator</title>
 
-  <style>
-    :root{
-      --bg: #0b1220;
-      --card: rgba(255,255,255,.06);
-      --stroke: rgba(255,255,255,.10);
-      --text: rgba(255,255,255,.88);
-      --muted: rgba(255,255,255,.66);
-      --brand: #37b6ff; /* später easy anpassen */
-      --brand2:#2ee59d;
-      --shadow: 0 20px 60px rgba(0,0,0,.45);
-      --radius: 18px;
-      --max: 1120px;
-    }
+<style>
+:root{
+  --brand:#1e3a8a;
+  --orange:#ff5a00;
+  --muted:#6b7280;
+  --stroke:rgba(0,0,0,.08);
+  --radius:18px;
+  --max:1100px;
+}
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(1200px 600px at 20% 10%, rgba(55,182,255,.25), transparent 60%),
-        radial-gradient(1000px 500px at 80% 20%, rgba(46,229,157,.18), transparent 55%),
-        radial-gradient(900px 600px at 50% 90%, rgba(255,255,255,.06), transparent 60%),
-        var(--bg);
-      line-height:1.5;
-    }
+*{box-sizing:border-box}
 
-    a{color:inherit}
-    .wrap{max-width:var(--max); margin:0 auto; padding:28px 20px 80px}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  background:#ffffff;
+  overflow-x:hidden;
+  color:#111;
+}
 
-    /* top bar */
-    .top{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:16px; padding:10px 0 22px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:12px; text-decoration:none;
-    }
-    .logo{
-      width:38px; height:38px; border-radius:12px;
-      background: linear-gradient(135deg, var(--brand), var(--brand2));
-      box-shadow: 0 10px 25px rgba(55,182,255,.25);
-    }
-    .brand b{display:block; font-size:14px; letter-spacing:.2px}
-    .brand span{display:block; font-size:12px; color:var(--muted)}
-    .nav{
-      display:flex; align-items:center; gap:14px; flex-wrap:wrap;
-    }
-    .nav a{
-      text-decoration:none; font-size:13px; color:var(--muted);
-      padding:8px 10px; border-radius:10px;
-    }
-    .nav a:hover{background:rgba(255,255,255,.06); color:var(--text)}
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      text-decoration:none; font-weight:600;
-      border-radius:12px; padding:12px 14px; font-size:14px;
-      border:1px solid var(--stroke);
-      background: rgba(255,255,255,.06);
-      backdrop-filter: blur(10px);
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
-      white-space:nowrap;
-    }
-    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.16)}
-    .btn.primary{
-      border:none;
-      background: linear-gradient(135deg, var(--brand), var(--brand2));
-      color:#06121a;
-      box-shadow: 0 18px 40px rgba(55,182,255,.22);
-    }
-    .btn.primary:hover{transform: translateY(-1px) scale(1.01)}
-    .btn.small{padding:10px 12px; font-size:13px}
+/* ================= VIDEO HERO ================= */
 
-    /* hero */
-    .hero{
-      display:grid; grid-template-columns: 1.2fr .8fr;
-      gap:20px; align-items:stretch;
-      margin-top:8px;
-    }
-    @media (max-width: 960px){
-      .hero{grid-template-columns:1fr}
-    }
-    .panel{
-      border:1px solid var(--stroke);
-      background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-    .hero-left{padding:32px}
-    .kicker{
-      display:inline-flex; align-items:center; gap:8px;
-      font-size:12px; color:var(--muted);
-      padding:8px 10px; border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.05);
-    }
-    h1{
-      margin:14px 0 10px;
-      font-size: clamp(30px, 4vw, 46px);
-      line-height:1.1;
-      letter-spacing:-.02em;
-    }
-    .lead{
-      margin:0 0 18px;
-      color: var(--muted);
-      font-size: 16px;
-      max-width: 52ch;
-    }
-    .cta-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
-    .mini{
-      margin-top:14px; color:var(--muted); font-size:12px;
-      display:flex; gap:14px; flex-wrap:wrap;
-    }
-    .mini span{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:8px 10px; border:1px solid rgba(255,255,255,.10);
-      border-radius:999px; background: rgba(0,0,0,.10);
-    }
+.video-hero{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100vh;
+  overflow:hidden;
+  z-index:-1;
+  transition:height .6s ease;
+}
 
-    /* right card */
-    .hero-right{
-      display:flex; flex-direction:column;
-    }
-    .preview{
-      padding:18px;
-      border-bottom:1px solid rgba(255,255,255,.08);
-    }
-    .shot{
-      border-radius: 14px;
-      background:
-        linear-gradient(135deg, rgba(55,182,255,.22), rgba(46,229,157,.16)),
-        radial-gradient(600px 240px at 30% 30%, rgba(255,255,255,.12), transparent 55%),
-        rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.10);
-      height: 210px;
-      position:relative;
-      overflow:hidden;
-    }
-    .shot::after{
-      content:"";
-      position:absolute; inset:-30%;
-      background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.12), transparent 45%);
-      transform: rotate(12deg);
-    }
-    .shot-label{
-      position:absolute; left:14px; bottom:12px;
-      font-size:12px; color:rgba(255,255,255,.8);
-      background: rgba(0,0,0,.25);
-      border:1px solid rgba(255,255,255,.10);
-      padding:8px 10px; border-radius: 999px;
-      backdrop-filter: blur(10px);
-    }
-    .facts{padding:18px}
-    .facts h3{margin:0 0 10px; font-size:14px; letter-spacing:.2px}
-    .list{display:grid; gap:10px}
-    .item{
-      display:flex; gap:10px; align-items:flex-start;
-      padding:12px; border-radius:14px;
-      border:1px solid rgba(255,255,255,.08);
-      background: rgba(0,0,0,.10);
-    }
-    .dot{
-      width:10px; height:10px; border-radius:999px;
-      background: linear-gradient(135deg, var(--brand), var(--brand2));
-      margin-top:5px;
-      flex: 0 0 auto;
-    }
-    .item b{display:block; font-size:13px}
-    .item p{margin:2px 0 0; color:var(--muted); font-size:12.5px}
+.video-hero.shrink{
+  height:65vh;
+}
 
-    /* sections */
-    .section{margin-top:26px}
-    .section h2{
-      margin:0 0 12px;
-      font-size: 18px;
-      letter-spacing: .2px;
-    }
-    .grid{
-      display:grid; grid-template-columns: repeat(3, 1fr);
-      gap:12px;
-    }
-    @media (max-width: 960px){
-      .grid{grid-template-columns:1fr}
-    }
-    .card{
-      padding:16px;
-      border-radius: var(--radius);
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.05);
-    }
-    .card b{display:block; margin-bottom:6px}
-    .card p{margin:0; color:var(--muted); font-size:13.5px}
+.video-hero video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transform:scale(1.1);
+  transition:transform 1.5s ease;
+}
 
-    /* final cta */
-    .final{
-      margin-top:26px;
-      padding:22px;
-      display:flex; align-items:center; justify-content:space-between; gap:16px;
-      border-radius: var(--radius);
-      border:1px solid rgba(255,255,255,.10);
-      background:
-        linear-gradient(135deg, rgba(55,182,255,.14), rgba(46,229,157,.10)),
-        rgba(255,255,255,.05);
-    }
-    @media (max-width: 960px){
-      .final{flex-direction:column; align-items:flex-start}
-    }
-    .final p{margin:6px 0 0; color:var(--muted); font-size:13.5px}
-    footer{
-      margin-top:28px;
-      color: rgba(255,255,255,.52);
-      font-size:12px;
-      display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
-    }
-    footer a{color: rgba(255,255,255,.65); text-decoration:none}
-    footer a:hover{text-decoration:underline}
-  </style>
+.video-hero.shrink video{
+  transform:scale(1);
+}
+
+.video-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    135deg,
+    rgba(255,255,255,0.85),
+    rgba(30,58,138,0.8)
+  );
+}
+
+/* Logo links */
+.video-logo{
+  position:absolute;
+  top:40px;
+  left:60px;
+  height:70px;
+}
+
+/* Titel */
+.hero-title{
+  position:absolute;
+  left:60px;
+  bottom:105px;
+  padding:14px 16px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,0.35);
+  background:rgba(255,255,255,0.18);
+  backdrop-filter: blur(12px);
+  color:#ffffff;
+  font-size:22px;
+  font-weight:700;
+  box-shadow:0 18px 40px rgba(0,0,0,0.18);
+  transition:opacity .6s ease, transform .6s ease;
+}
+
+.video-hero.shrink .hero-title{
+  opacity:0;
+  transform:translateY(-20px);
+}
+
+/* Scroll Indicator */
+.scroll-indicator{
+  position:absolute;
+  bottom:40px;
+  left:50%;
+  transform:translateX(-50%);
+  color:white;
+  font-size:13px;
+  text-align:center;
+  transition:opacity .4s ease;
+}
+
+.video-hero.shrink .scroll-indicator{
+  opacity:0;
+}
+
+.scroll-indicator span{
+  display:block;
+  width:22px;
+  height:35px;
+  border:2px solid white;
+  border-radius:20px;
+  margin:10px auto 0;
+  position:relative;
+}
+
+.scroll-indicator span::after{
+  content:"";
+  position:absolute;
+  top:6px;
+  left:50%;
+  transform:translateX(-50%);
+  width:4px;
+  height:6px;
+  background:white;
+  border-radius:3px;
+  animation:scroll 1.5s infinite;
+}
+
+@keyframes scroll{
+  0%{opacity:1;top:6px}
+  100%{opacity:0;top:18px}
+}
+
+/* ================= FLOATING BOXES RECHTS ================= */
+
+.floating-boxes{
+  position:fixed;
+  right:60px;
+  top:140px;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  z-index:2;
+  pointer-events:none;
+  transform:translateY(var(--floatY,0px));
+  transition:opacity .35s ease;
+}
+
+.floating-box{
+  width:240px;
+  height:150px;
+  border-radius:var(--radius);
+  overflow:hidden;
+  box-shadow:0 22px 60px rgba(0,0,0,.25);
+  border:1px solid rgba(255,255,255,.25);
+  background:rgba(255,255,255,.1);
+  backdrop-filter: blur(10px);
+}
+
+.floating-box img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* leichte Staffelung */
+.floating-box:nth-child(1){ transform:translateX(0px); }
+.floating-box:nth-child(2){ transform:translateX(-20px); }
+.floating-box:nth-child(3){ transform:translateX(-40px); }
+
+/* ================= CONTENT ================= */
+
+.wrap{
+  max-width:var(--max);
+  margin:100vh auto 0;
+  padding:70px 20px 100px;
+  background:#ffffff;
+  border-radius:30px 30px 0 0;
+  position:relative;
+  z-index:1;
+}
+
+.hero{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:40px;
+  align-items:center;
+}
+
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr}
+  .floating-boxes{
+    right:20px;
+    top:120px;
+  }
+}
+
+h1{
+  font-size:44px;
+  margin:0 0 16px;
+}
+
+.lead{
+  color:var(--muted);
+  font-size:17px;
+  margin-bottom:25px;
+}
+
+.btn{
+  padding:14px 20px;
+  border-radius:12px;
+  font-weight:600;
+  font-size:14px;
+  text-decoration:none;
+  background:var(--orange);
+  color:white;
+  transition:.3s ease;
+  display:inline-block;
+}
+
+.btn:hover{
+  background:#e14f00;
+  transform:translateY(-3px);
+  box-shadow:0 8px 20px rgba(255,90,0,.35);
+}
+
+.section{
+  margin-top:120px;
+}
+
+.card{
+  border:1px solid var(--stroke);
+  border-radius:var(--radius);
+  padding:20px;
+  margin-bottom:20px;
+}
+
+footer{
+  margin-top:70px;
+  font-size:12px;
+  color:var(--muted);
+}
+</style>
 </head>
 
 <body>
-  <div class="wrap">
-    <div class="top">
-      <a class="brand" href="#">
-        <div class="logo" aria-hidden="true"></div>
-        <div>
-          <b>LAUMER – Garagen-Konfigurator</b>
-          <span>In wenigen Minuten zur Wunschgarage</span>
-        </div>
-      </a>
 
-      <div class="nav">
-        <a href="#vorteile">Vorteile</a>
-        <a href="#ablauf">Ablauf</a>
-        <a href="#kontakt">Kontakt</a>
-        <a class="btn small" href="#konfigurator">Zum Konfigurator</a>
-      </div>
-    </div>
+<div class="video-hero" id="hero">
+  <video autoplay muted loop playsinline>
+    <source src="video/garage.mp4" type="video/mp4">
+  </video>
 
-    <div class="hero">
-      <div class="panel hero-left">
-        <div class="kicker">Konfigurieren • Visualisieren • Anfragen</div>
-        <h1>Deine Garage, genau wie du sie brauchst.</h1>
-        <p class="lead">
-          Stell Maße, Optik und Ausstattung zusammen – klar geführt, transparent und ohne Umwege.
-          Am Ende bekommst du eine saubere Grundlage für die Anfrage.
-        </p>
+  <div class="video-overlay"></div>
 
-        <div class="cta-row" id="konfigurator">
-          <!-- TODO: hier deine echte Konfigurator-URL eintragen -->
-          <a class="btn primary" href="https://DEINE-KONFIGURATOR-URL" target="_blank" rel="noopener">Jetzt konfigurieren</a>
-          <a class="btn" href="#kontakt">Beratung anfragen</a>
-        </div>
+  <img src="images/laumer-logo.svg" class="video-logo">
 
-        <div class="mini">
-          <span>Kurze Schritte</span>
-          <span>Mobil optimiert</span>
-          <span>Klare Ergebnis-Übersicht</span>
-        </div>
-      </div>
-
-      <div class="panel hero-right">
-        <div class="preview">
-          <div class="shot" role="img" aria-label="Vorschau-Konfigurator">
-            <div class="shot-label">Vorschau: Konfiguration</div>
-          </div>
-        </div>
-
-        <div class="facts" id="vorteile">
-          <h3>Warum der Konfigurator?</h3>
-          <div class="list">
-            <div class="item">
-              <div class="dot" aria-hidden="true"></div>
-              <div>
-                <b>Einfach starten</b>
-                <p>Du wirst Schritt für Schritt durch die wichtigsten Entscheidungen geführt.</p>
-              </div>
-            </div>
-            <div class="item">
-              <div class="dot" aria-hidden="true"></div>
-              <div>
-                <b>Saubere Auswahl</b>
-                <p>Maße, Tor, Dach, Farbe, Zubehör – übersichtlich und nachvollziehbar.</p>
-              </div>
-            </div>
-            <div class="item">
-              <div class="dot" aria-hidden="true"></div>
-              <div>
-                <b>Solide Grundlage</b>
-                <p>Am Ende hast du eine klare Konfiguration für Angebot/Planung.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="section" id="ablauf">
-      <h2>So läuft’s ab</h2>
-      <div class="grid">
-        <div class="card">
-          <b>1) Grunddaten wählen</b>
-          <p>Typ, Maße und Nutzung festlegen – damit alles passt.</p>
-        </div>
-        <div class="card">
-          <b>2) Optik & Ausstattung</b>
-          <p>Tor, Dach, Farbe, Zubehör – die Details machen den Unterschied.</p>
-        </div>
-        <div class="card">
-          <b>3) Ergebnis nutzen</b>
-          <p>Konfiguration speichern oder direkt als Anfrage an uns schicken.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="final" id="kontakt">
-      <div>
-        <b>Du willst schnell zur passenden Lösung?</b>
-        <p>Starte im Konfigurator – oder schreib uns kurz, wenn du Beratung brauchst.</p>
-      </div>
-      <div class="cta-row">
-        <!-- TODO: hier echte Links eintragen -->
-        <a class="btn primary" href="https://DEINE-KONFIGURATOR-URL" target="_blank" rel="noopener">Konfigurator öffnen</a>
-        <a class="btn" href="mailto:info@deinefirma.de?subject=Beratung%20Garagen-Konfigurator">E-Mail senden</a>
-      </div>
-    </div>
-
-    <footer>
-      <div>© <span id="year"></span> Laumer • Alle Rechte vorbehalten</div>
-      <div>
-        <a href="#">Impressum</a> ·
-        <a href="#">Datenschutz</a>
-      </div>
-    </footer>
+  <div class="hero-title">
+    Laumer Garagen Konfigurator
   </div>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+  <div class="scroll-indicator">
+    Scroll
+    <span></span>
+  </div>
+</div>
+
+<!-- Floating Bilder rechts -->
+<div class="floating-boxes" id="floatBoxes">
+  <div class="floating-box"><img src="images/bild1.jpg"></div>
+  <div class="floating-box"><img src="images/bild2.jpg"></div>
+  <div class="floating-box"><img src="images/bild3.jpg"></div>
+</div>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div>
+      <h1>Deine Garage. Klar konfiguriert.</h1>
+      <p class="lead">
+        Stelle Maße, Optik und Ausstattung individuell zusammen.
+        Transparent geführt, sauber strukturiert – direkt zur passenden Lösung.
+      </p>
+      <a class="btn" href="#">Jetzt konfigurieren</a>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="card">
+      <b>1. Maße & Typ wählen</b>
+      <p>Grunddaten definieren und Nutzung festlegen.</p>
+    </div>
+    <div class="card">
+      <b>2. Ausstattung bestimmen</b>
+      <p>Tor, Dach, Farbe und Details konfigurieren.</p>
+    </div>
+    <div class="card">
+      <b>3. Ergebnis nutzen</b>
+      <p>Konfiguration speichern oder Anfrage senden.</p>
+    </div>
+  </div>
+
+  <footer>
+    © 2026 Laumer
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  const hero = document.getElementById("hero");
+  const floatBoxes = document.getElementById("floatBoxes");
+
+  function onScroll(){
+    const y = window.scrollY || 0;
+
+    if(y > 120){
+      hero.classList.add("shrink");
+    } else {
+      hero.classList.remove("shrink");
+    }
+
+    const move = Math.min(y * 0.55, 300);
+    const opacity = y < 400 ? 1 - y/400 : 0;
+
+    floatBoxes.style.setProperty("--floatY", move + "px");
+    floatBoxes.style.opacity = opacity;
+  }
+
+  window.addEventListener("scroll", onScroll, {passive:true});
+  onScroll();
+})();
+</script>
+
 </body>
 </html>
